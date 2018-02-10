@@ -1,0 +1,55 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "kubernetes.name" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ template "kubernetes.name" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ""
+      labels:
+        app: {{ template "kubernetes.name" . }}
+    spec:
+      nodeSelector:
+        {{- range $key, $val := .Values.kubeslackNodeSelector }}
+        {{ $key }}: {{ $val | quote }}
+        {{- end}}
+      containers:
+      - name: {{ template "kubernetes.name" . }}
+        image: willwill/kube-slack:{{ .Values.kubeslackImageVersion }}
+        env:
+        - name: SLACK_URL
+          value: {{ .Values.kubeslackSlackUrl }}
+        {{ if .Values.kubeslackTickRate }}
+        - name: TICK_RATE
+          value: {{ .Values.kubeslackTickRate }}
+        {{ end }}
+        {{ if .Values.kubeslackFloodExpire }}
+        - name: FLOOD_EXPIRE
+          value: {{ .Values.kubeslackFloodExpire }}
+        {{ end }}
+        {{ if .Values.kubeslackNotReadyMinTime }}
+        - name: NOT_READY_MIN_TIME
+          value: {{ .Values.kubeslackNotReadyMinTime }}
+        {{ end }}
+        {{ if .Values.kubeslackKubeUseKubeconfig }}
+        - name: KUBE_USE_KUBECONFIG
+          value: {{ .Values.kubeslackKubeUseKubeconfig }}
+        {{ end }}
+        {{ if .Values.kubeslackKubeUseCluster }}
+        - name: KUBE_USE_CLUSTER
+          value: {{ .Values.kubeslackKubeUseCluster }}
+        {{ end }}
+        {{ if .Values.kubeslackKubeNamespaceOnly }}
+        - name: KUBE_NAMESPACE_ONLY
+          value: {{ .Values.kubeslackKubeNamespaceOnly }}
+        {{ end }}

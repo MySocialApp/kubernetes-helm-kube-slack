@@ -1,0 +1,9 @@
+kubeslackImageVersion: v3.2.0
+kubeslackSlackUrl: ""
+
+#kubeslackTickRate: 15000
+#kubeslackFloodExpire: 60000
+#kubeslackNotReadyMinTime: 60000
+#kubeslackKubeUseKubeconfig: "off"
+#kubeslackKubeUseCluster: "on"
+#kubeslackKubeNamespaceOnly: "false"
