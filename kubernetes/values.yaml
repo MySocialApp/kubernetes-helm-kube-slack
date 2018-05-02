@@ -1,6 +1,9 @@
 kubeslackImageVersion: v3.2.0
 kubeslackSlackUrl: ""
 
+kubeslackNodeSelector:
+  node-role.kubernetes.io/node: "true"
+
 #kubeslackTickRate: 15000
 #kubeslackFloodExpire: 60000
 #kubeslackNotReadyMinTime: 60000

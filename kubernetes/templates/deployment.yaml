@@ -28,28 +28,28 @@ spec:
         image: willwill/kube-slack:{{ .Values.kubeslackImageVersion }}
         env:
         - name: SLACK_URL
-          value: {{ .Values.kubeslackSlackUrl }}
+          value: "{{ .Values.kubeslackSlackUrl }}"
         {{ if .Values.kubeslackTickRate }}
         - name: TICK_RATE
-          value: {{ .Values.kubeslackTickRate }}
+          value: "{{ .Values.kubeslackTickRate }}"
         {{ end }}
         {{ if .Values.kubeslackFloodExpire }}
         - name: FLOOD_EXPIRE
-          value: {{ .Values.kubeslackFloodExpire }}
+          value: "{{ .Values.kubeslackFloodExpire }}"
         {{ end }}
         {{ if .Values.kubeslackNotReadyMinTime }}
         - name: NOT_READY_MIN_TIME
-          value: {{ .Values.kubeslackNotReadyMinTime }}
+          value: "{{ .Values.kubeslackNotReadyMinTime }}"
         {{ end }}
         {{ if .Values.kubeslackKubeUseKubeconfig }}
         - name: KUBE_USE_KUBECONFIG
-          value: {{ .Values.kubeslackKubeUseKubeconfig }}
+          value: "{{ .Values.kubeslackKubeUseKubeconfig }}"
         {{ end }}
         {{ if .Values.kubeslackKubeUseCluster }}
         - name: KUBE_USE_CLUSTER
-          value: {{ .Values.kubeslackKubeUseCluster }}
+          value: "{{ .Values.kubeslackKubeUseCluster }}"
         {{ end }}
         {{ if .Values.kubeslackKubeNamespaceOnly }}
         - name: KUBE_NAMESPACE_ONLY
-          value: {{ .Values.kubeslackKubeNamespaceOnly }}
+          value: "{{ .Values.kubeslackKubeNamespaceOnly }}"
         {{ end }}
